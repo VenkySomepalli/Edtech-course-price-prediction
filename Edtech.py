@@ -38,7 +38,7 @@ data = pd.DataFrame(result, columns = ['s.no', 'Institute', 'Subject', 'Location
 
 
 ## or use my computor to load the data set.
-data = pd.read_csv("/home/venky/Desktop/Datascience_360/Real_Project_costprediction/Test_Models/MOCK_DATA.csv")
+data = pd.read_csv("/home/venky/Desktop/Datascience_360/Real_Project_costprediction/VS-Edtech_CourseCost_Model-Deployment/MOCK_DATA.csv")
 
 import numpy as np ## numerical(mathematical) calculations
 
@@ -118,7 +118,7 @@ print(vif_data)
 from sklearn.model_selection import train_test_split
 x_train, x_test, y_train, y_test = train_test_split(data.drop("Price", axis = 1), data.Price, test_size = 0.2, random_state = 42)
 
-import numpy as np
+
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_squared_error, make_scorer
 rmse =lambda y, y_hat: np.sqrt(mean_squared_error(y, y_hat))
@@ -148,7 +148,7 @@ pipeline_optimizer.export('Mock.py')
 
 
 ## Best fit model
-import numpy as np
+
 from sklearn.ensemble import AdaBoostRegressor, ExtraTreesRegressor, RandomForestRegressor
 from sklearn.model_selection import train_test_split
 from sklearn.pipeline import make_pipeline, make_union
@@ -210,11 +210,14 @@ plt.scatter(y_test, y_pred_test)
 
 
 import pickle
+
 pickle.dump(exported_pipeline, open('data_model.pkl', 'wb'))
 
 # Load the model from disk
-model = pickle.load(open('data_model.pkl', 'rb'))
-print(model.predict([[9,2,4,1,0,0,1,1,15,162,4,121,655,120,182]]))
+model = pickle.load(open("data_model.pkl", "rb"))
+
+result = model.score(x_test, y_test)
+print(result)
 
 #Model predict the course price correctly based on features(15).
 
